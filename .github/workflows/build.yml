@@ -5,10 +5,15 @@ on:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   build:
     runs-on: windows-latest
+    timeout-minutes: 20
     defaults:
       run:
         working-directory: desktop-app
@@ -24,3 +29,14 @@ jobs:
           cache-dependency-path: desktop-app/pnpm-lock.yaml
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
+      - name: Package Windows portable app
+        if: github.event_name != 'pull_request'
+        run: pnpm desktop:pack
+      - name: Upload Windows portable app
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: mohe-windows-portable
+          path: desktop-app/release/*.exe
+          if-no-files-found: error
+          retention-days: 30
