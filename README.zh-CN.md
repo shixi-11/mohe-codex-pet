@@ -8,6 +8,8 @@
 
 <p align="center">创作者：<strong>光之十一</strong></p>
 
+<p align="center">关注后续：<a href="https://x.com/11Shixi">@11Shixi</a></p>
+
 <p align="center">
   <a href="README.md">English</a> · <a href="README.zh-CN.md">简体中文</a>
 </p>
@@ -57,6 +59,13 @@
 - 空闲时每隔 24–40 秒随机抬头、眯眼、打滚或蜷成一团。
 - 内置 25 分钟专注计时、本地记忆卡、实时动态和动作工坊。
 - 不需要账号，不上传记忆，不收集使用数据。
+
+## 我应该下载哪个版本？
+
+| 如果你想…… | 下载 |
+|---|---|
+| 把墨核加入 Codex 的宠物列表 | [Codex 宠物包](codex-pet/) |
+| 在 Windows 上运行完整互动栖息地 | [Windows 桌面版 Release](https://github.com/shixi-11/mohe-codex-pet/releases) |
 
 ## 安装 Codex 宠物版
 
