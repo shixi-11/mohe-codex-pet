@@ -6,9 +6,9 @@
 
 <p align="center"><strong>一只守护长期工作的本地小兽。</strong></p>
 
-<p align="center">创作者：<strong>光之十一</strong></p>
+<p align="center">创作者：<a href="https://github.com/shixi-11"><strong>光之十一</strong></a></p>
 
-<p align="center">关注后续：<a href="https://x.com/11Shixi">@11Shixi</a></p>
+<p align="center">在 X 查看后续更新：<a href="https://x.com/11Shixi">@11Shixi</a></p>
 
 <p align="center">
   <a href="README.md">English</a> · <a href="README.zh-CN.md">简体中文</a>
@@ -19,7 +19,7 @@
 <p align="center">
   <img alt="MIT License" src="https://img.shields.io/badge/license-MIT-c89b52" />
   <img alt="Windows" src="https://img.shields.io/badge/platform-Windows-4f9dff" />
-  <img alt="Codex Pet v2" src="https://img.shields.io/badge/Codex%20Pet-v2-66cdaa" />
+  <img alt="兼容 Codex 宠物" src="https://img.shields.io/badge/Codex%20Pet-compatible-66cdaa" />
   <img alt="本地优先" src="https://img.shields.io/badge/data-local--first-20262a" />
 </p>
 
@@ -33,7 +33,7 @@
 
 这个仓库同时收录墨核的两个版本：
 
-- **Codex 宠物版**：可安装的 v2 宠物包，使用 8 × 11 动画图集，包含标准状态与 16 个方向的移动行。
+- **Codex 宠物版**：可直接安装到 Codex，包含待机、定向奔跑、挥手、跳跃、等待、工作和审查等动作，以及一圈连贯的 16 向环视。
 - **Windows 桌面版**：可以触碰、梳毛、记忆、专注和自主变换心情的完整栖息地。
 
 ## 墨核不只有一种样子
@@ -108,6 +108,4 @@ pnpm desktop
 ## 开源许可
 
 代码与仓库内的墨核原创资产采用 [MIT License](LICENSE) 开源。
-
-墨核是光之十一创作的独立社区项目，与 OpenAI 无隶属、授权或背书关系。
 
