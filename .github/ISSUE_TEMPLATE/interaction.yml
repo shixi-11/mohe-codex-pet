@@ -1,0 +1,25 @@
+name: Interaction idea
+description: Suggest a new motion, response, mood, or practical feature for Mohe.
+title: "[Interaction] "
+labels: [enhancement]
+body:
+  - type: textarea
+    id: moment
+    attributes:
+      label: What moment should trigger it?
+      placeholder: For example, brushing the ear for two seconds or finishing a focus session.
+    validations:
+      required: true
+  - type: textarea
+    id: sequence
+    attributes:
+      label: What should Mohe do?
+      description: Describe a short, physically coherent sequence rather than a single pose.
+    validations:
+      required: true
+  - type: textarea
+    id: value
+    attributes:
+      label: Why would people enjoy or use it?
+    validations:
+      required: true
