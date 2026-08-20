@@ -1,4 +1,4 @@
-name: Release desktop app
+name: Release Mohe
 
 on:
   push:
@@ -26,7 +26,7 @@ jobs:
 
       - uses: pnpm/action-setup@v4
         with:
-          version: 10
+          version: 10.17.1
 
       - uses: actions/setup-node@v4
         with:
@@ -34,27 +34,66 @@ jobs:
           cache: pnpm
           cache-dependency-path: desktop-app/pnpm-lock.yaml
 
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Validate Codex Pet package
+        working-directory: ${{ github.workspace }}
+        run: |
+          python -m pip install --disable-pip-version-check Pillow==11.3.0
+          python scripts/validate_codex_pet.py
+
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
       - name: Build and package
         run: pnpm desktop:pack
 
-      - name: Prepare release assets
+      - name: Smoke-test packaged desktop app
         shell: pwsh
         run: |
-          $version = if ("${{ github.event_name }}" -eq "workflow_dispatch") { "${{ inputs.version }}" } else { "${{ github.ref_name }}" }
+          $exe = Get-ChildItem -LiteralPath "release" -Filter "*.exe" -File | Select-Object -First 1
+          if ($null -eq $exe) { throw "No Windows executable was produced." }
+          $report = Join-Path $env:RUNNER_TEMP "mohe-smoke.json"
+          $env:MOHE_SMOKE_TEST = "1"
+          $env:MOHE_SMOKE_REPORT = $report
+          $process = Start-Process -FilePath $exe.FullName -PassThru -Wait
+          if ($process.ExitCode -ne 0) { throw "Desktop smoke test exited with code $($process.ExitCode)." }
+          $result = Get-Content -LiteralPath $report -Raw | ConvertFrom-Json
+          if (-not $result.shell -or -not $result.imageLoaded -or $result.textLength -lt 100 -or $result.title -ne "墨核 · Windows 桌面宠物") {
+            throw "Desktop smoke test did not render the expected interface: $(Get-Content -LiteralPath $report -Raw)"
+          }
+
+      - name: Prepare release assets
+        shell: pwsh
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          INPUT_VERSION: ${{ inputs.version }}
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          $version = if ($env:EVENT_NAME -eq "workflow_dispatch") { $env:INPUT_VERSION } else { $env:REF_NAME }
           if ($version -notmatch '^v[0-9]+\.[0-9]+\.[0-9]+$') {
             throw "Version must look like v1.0.0"
           }
+          $packageVersion = (Get-Content -LiteralPath "package.json" -Raw | ConvertFrom-Json).version
+          if ($version -ne "v$packageVersion") {
+            throw "Release tag $version does not match desktop-app/package.json version v$packageVersion."
+          }
           $exe = Get-ChildItem -LiteralPath "release" -Filter "*.exe" -File | Select-Object -First 1
           if ($null -eq $exe) { throw "No Windows executable was produced." }
-          $zip = "Mohe-Windows-Portable-$version.zip"
-          Compress-Archive -LiteralPath $exe.FullName -DestinationPath "..\$zip" -Force
-          $hash = (Get-FileHash -LiteralPath "..\$zip" -Algorithm SHA256).Hash.ToLowerInvariant()
-          "$hash  $zip" | Out-File -LiteralPath "..\SHA256SUMS.txt" -Encoding ascii
+          $desktopZip = "Mohe-Windows-Portable-$version.zip"
+          $codexZip = "Mohe-Codex-Pet-$version.zip"
+          Compress-Archive -LiteralPath $exe.FullName -DestinationPath "..\$desktopZip" -Force
+          Compress-Archive -LiteralPath "..\codex-pet\install-mohe.ps1", "..\codex-pet\mohe" -DestinationPath "..\$codexZip" -Force
+          $hashLines = foreach ($asset in @($desktopZip, $codexZip)) {
+            $hash = (Get-FileHash -LiteralPath "..\$asset" -Algorithm SHA256).Hash.ToLowerInvariant()
+            "$hash  $asset"
+          }
+          $hashLines | Out-File -LiteralPath "..\SHA256SUMS.txt" -Encoding ascii
           "VERSION=$version" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
-          "ASSET_ZIP=$zip" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          "DESKTOP_ZIP=$desktopZip" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          "CODEX_ZIP=$codexZip" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
 
       - name: Create GitHub Release
         shell: pwsh
@@ -63,7 +102,7 @@ jobs:
         run: |
           $existing = gh release view $env:VERSION --repo $env:GITHUB_REPOSITORY 2>$null
           if ($LASTEXITCODE -eq 0) {
-            Write-Host "Release $env:VERSION already exists; skipping duplicate creation."
+            gh release upload $env:VERSION "..\$env:DESKTOP_ZIP" "..\$env:CODEX_ZIP" "..\SHA256SUMS.txt" --clobber --repo $env:GITHUB_REPOSITORY
             exit 0
           }
-          gh release create $env:VERSION "..\$env:ASSET_ZIP" "..\SHA256SUMS.txt" --repo $env:GITHUB_REPOSITORY --target $env:GITHUB_SHA --title "Mohe $env:VERSION · 墨核" --generate-notes
+          gh release create $env:VERSION "..\$env:DESKTOP_ZIP" "..\$env:CODEX_ZIP" "..\SHA256SUMS.txt" --repo $env:GITHUB_REPOSITORY --target $env:GITHUB_SHA --title "Mohe $env:VERSION · 墨核" --generate-notes

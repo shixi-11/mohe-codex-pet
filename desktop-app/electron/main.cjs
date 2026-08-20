@@ -2,6 +2,9 @@ const { app, BrowserWindow, shell } = require('electron')
 const path = require('node:path')
 const fs = require('node:fs')
 
+// Keep v1 local memory available after clarifying the desktop package name.
+app.setPath('userData', path.join(app.getPath('appData'), 'mohe-codex-pet'))
+
 function createWindow() {
   const win = new BrowserWindow({
     width: 1480,
@@ -11,7 +14,7 @@ function createWindow() {
     show: false,
     backgroundColor: '#0c1013',
     autoHideMenuBar: true,
-    title: '墨核',
+    title: '墨核 · Windows 桌面宠物',
     webPreferences: {
       contextIsolation: true,
       nodeIntegration: false,

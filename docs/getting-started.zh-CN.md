@@ -22,7 +22,14 @@ powershell -ExecutionPolicy Bypass -File .\codex-pet\install-mohe.ps1
 4. 完全退出并重新打开 Codex。
 5. 进入「宠物」页面；列表未更新时先点刷新，再选择「墨核」。
 
-安装脚本只会把公开宠物包复制到 `%USERPROFILE%\.codex\pets\mohe`。
+如果设置了 `CODEX_HOME`，安装脚本会把公开宠物包复制到 `$env:CODEX_HOME\pets\mohe`；否则安装到 `%USERPROFILE%\.codex\pets\mohe`。
+
+从 Release 下载后，可先用 `SHA256SUMS.txt` 核对文件是否完整：
+
+```powershell
+$package = Get-ChildItem .\Mohe-Codex-Pet-*.zip | Select-Object -First 1
+Get-FileHash $package.FullName -Algorithm SHA256
+```
 
 ## 从源码运行 Windows 桌面版
 
@@ -43,7 +50,7 @@ pnpm build
 pnpm desktop
 ```
 
-可直接双击的 Windows 构建会在准备好后发布到 [Releases](https://github.com/shixi-11/mohe-codex-pet/releases)。在此之前，请按上面的源码方式运行。
+可直接双击的 Windows 版本在 [Releases](https://github.com/shixi-11/mohe-pet/releases) 下载。请选择 `Mohe-Windows-Portable-*.zip`；名字相近的 `Mohe-Codex-Pet-*.zip` 用于 Codex 的「宠物」页面。
 
 ## 桌面版怎么互动
 
@@ -97,3 +104,5 @@ Remove-Item -LiteralPath "$env:USERPROFILE\.codex\pets\mohe" -Recurse
 ```
 
 桌面版若从源码运行：先关闭应用，再删除本地仓库副本或生成的构建目录。
+
+Windows 便携版：关闭墨核后删除解压出的可执行文件即可。若还要清除本地记忆，再手动删除 `%APPDATA%\mohe-codex-pet`；不删除则可在后续版本继续沿用。
