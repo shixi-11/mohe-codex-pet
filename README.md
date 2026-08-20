@@ -8,7 +8,7 @@
 
 <p align="center">
   <a href="README.md">English</a> · <a href="README.zh-CN.md">简体中文</a>
-</p>
+</p>\r\n\r\n<p align="center"><strong><a href="docs/getting-started.md">Installation, usage and troubleshooting guide</a></strong></p>
 
 <p align="center">
   <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-c89b52" />
