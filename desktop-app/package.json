@@ -1,6 +1,8 @@
 {
   "name": "mohe-codex-pet",
   "private": true,
+  "description": "Mohe (墨核) desktop companion for long-running work.",
+  "author": "Shixi Lin",
   "version": "1.0.0",
   "type": "module",
   "main": "electron/main.cjs",
