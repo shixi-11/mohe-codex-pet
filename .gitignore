@@ -1,0 +1,28 @@
+# Local logs and temporary files
+*.log
+*.tmp
+electron-*.log
+
+# Desktop development dependencies and build output
+desktop-app/node_modules/
+desktop-app/dist/
+desktop-app/desktop/
+desktop-app/release/
+desktop-app/qa/
+desktop-app/.vite/
+
+# Local hatch-pet production workspace (public package lives in codex-pet/)
+hatch-pet/
+desktop-app/design/
+desktop-app/electron/app-package.json
+
+# OS metadata
+.DS_Store
+Thumbs.db
+
+# Python and editor caches
+__pycache__/
+*.py[cod]
+.venv/
+.idea/
+.vscode/
