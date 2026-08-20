@@ -30,7 +30,7 @@ jobs:
         working-directory: desktop-app
     steps:
       - uses: actions/checkout@v4
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v6
         with:
           version: 10.17.1
       - uses: actions/setup-node@v4
