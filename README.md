@@ -19,7 +19,7 @@
 <p align="center">
   <img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-c89b52" />
   <img alt="Platform: Windows" src="https://img.shields.io/badge/platform-Windows-4f9dff" />
-  <img alt="Codex Pet v2" src="https://img.shields.io/badge/Codex%20Pet-v2-66cdaa" />
+  <img alt="Codex Pet compatible" src="https://img.shields.io/badge/Codex%20Pet-compatible-66cdaa" />
   <img alt="Local first" src="https://img.shields.io/badge/data-local--first-20262a" />
 </p>
 
@@ -33,7 +33,7 @@ Built for people who work on things long enough to deserve a guardian.
 
 This repository contains both versions of the same character:
 
-- **Codex Pet** — an installable v2 pet package with an 8 × 11 animated sprite atlas and 16-direction movement rows.
+- **Codex Pet** — installs directly into Codex, with idle, directional running, waving, jumping, waiting, working, and review animations, plus a continuous 16-direction look-around loop.
 - **Windows desktop app** — an interactive habitat with touch responses, grooming mode, local memory, focus sessions, an activity trail, and autonomous moods.
 
 ## Mohe has moods
@@ -108,6 +108,4 @@ Bug reports, interaction ideas, new motion sequences, accessibility improvements
 ## License
 
 Code and included original Mohe assets are released under the [MIT License](LICENSE).
-
-Mohe is an independent community project created by Shixi Lin. It is not affiliated with or endorsed by OpenAI.
 
