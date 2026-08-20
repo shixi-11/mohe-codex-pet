@@ -58,7 +58,7 @@ jobs:
           }
       - name: Upload Windows portable app
         if: github.event_name != 'pull_request'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: mohe-windows-portable
           path: desktop-app/release/*.exe
