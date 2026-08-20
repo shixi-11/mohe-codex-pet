@@ -6,9 +6,9 @@
 
 <p align="center"><strong>一只守护长期工作的本地小兽。</strong></p>
 
-<p align="center">创作者：<strong>光之十一</strong></p>
+<p align="center">创作者：<a href="https://github.com/shixi-11"><strong>光之十一</strong></a></p>
 
-<p align="center">关注后续：<a href="https://x.com/11Shixi">@11Shixi</a></p>
+<p align="center">在 X 查看后续更新：<a href="https://x.com/11Shixi">@11Shixi</a></p>
 
 <p align="center">
   <a href="README.md">English</a> · <a href="README.zh-CN.md">简体中文</a>

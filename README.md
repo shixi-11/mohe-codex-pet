@@ -6,9 +6,9 @@
 
 <p align="center"><strong>A quiet local creature for long-running work.</strong></p>
 
-<p align="center">Created by <strong>Shixi Lin</strong>.</p>
+<p align="center">Created by <a href="https://github.com/shixi-11"><strong>Shixi Lin</strong></a>.</p>
 
-<p align="center">Follow updates: <a href="https://x.com/11Shixi">@11Shixi</a></p>
+<p align="center">Follow updates on X: <a href="https://x.com/11Shixi">@11Shixi</a></p>
 
 <p align="center">
   <a href="README.md">English</a> · <a href="README.zh-CN.md">简体中文</a>
