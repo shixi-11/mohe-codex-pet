@@ -8,6 +8,8 @@
 
 <p align="center">Created by <strong>Shixi Lin</strong>.</p>
 
+<p align="center">Follow updates: <a href="https://x.com/11Shixi">@11Shixi</a></p>
+
 <p align="center">
   <a href="README.md">English</a> · <a href="README.zh-CN.md">简体中文</a>
 </p>
@@ -57,6 +59,13 @@ This repository contains both versions of the same character:
 - Quiet autonomous actions every 24–40 seconds: looking up, relaxing, rolling, or curling into a ball.
 - A 25-minute focus timer, local memory cards, an activity trail, and an action workshop.
 - No account, analytics, or cloud sync. Memory is stored locally on the device.
+
+## Which version should I use?
+
+| If you want to… | Download |
+|---|---|
+| Add Mohe to the Codex Pet list | [Codex Pet package](codex-pet/) |
+| Run the full interactive habitat on Windows | [Windows desktop release](https://github.com/shixi-11/mohe-codex-pet/releases) |
 
 ## Install the Codex Pet
 
