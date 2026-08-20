@@ -14,7 +14,7 @@
     "desktop": "electron .",
     "desktop:pack": "vite build && electron-builder --win portable --x64"
   },
-  "dependencies": {"react": "19.2.7", "react-dom": "19.2.7"},
+  "dependencies": {"react": "19.2.8", "react-dom": "19.2.7"},
   "devDependencies": {"@vitejs/plugin-react": "6.0.3", "electron": "43.1.0", "electron-builder": "26.15.3", "vite": "8.1.4"},
   "build": {
     "appId": "local.codex.mohe",
