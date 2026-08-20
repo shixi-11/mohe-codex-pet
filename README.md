@@ -97,3 +97,4 @@ Bug reports, interaction ideas, new motion sequences, accessibility improvements
 Code and included original Mohe assets are released under the [MIT License](LICENSE).
 
 Mohe is an independent community project and is not affiliated with or endorsed by OpenAI.
+
