@@ -6,6 +6,8 @@
 
 <p align="center"><strong>一只守护长期工作的本地小兽。</strong></p>
 
+<p align="center">创作者：<strong>光之十一</strong></p>
+
 <p align="center">
   <a href="README.md">English</a> · <a href="README.zh-CN.md">简体中文</a>
 </p>
@@ -98,5 +100,5 @@ pnpm desktop
 
 代码与仓库内的墨核原创资产采用 [MIT License](LICENSE) 开源。
 
-墨核是独立的社区项目，与 OpenAI 无隶属或背书关系。
+墨核是光之十一创作的独立社区项目，与 OpenAI 无隶属、授权或背书关系。
 

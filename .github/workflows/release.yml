@@ -1,0 +1,69 @@
+name: Release desktop app
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Release tag, for example v1.0.0"
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: windows-latest
+    timeout-minutes: 25
+    defaults:
+      run:
+        working-directory: desktop-app
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+          cache-dependency-path: desktop-app/pnpm-lock.yaml
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build and package
+        run: pnpm desktop:pack
+
+      - name: Prepare release assets
+        shell: pwsh
+        run: |
+          $version = if ("\${{ github.event_name }}" -eq "workflow_dispatch") { "\${{ inputs.version }}" } else { "\${{ github.ref_name }}" }
+          if ($version -notmatch '^v[0-9]+\.[0-9]+\.[0-9]+$') {
+            throw "Version must look like v1.0.0"
+          }
+          $exe = Get-ChildItem -LiteralPath "release" -Filter "*.exe" -File | Select-Object -First 1
+          if ($null -eq $exe) { throw "No Windows executable was produced." }
+          $zip = "Mohe-Windows-Portable-$version.zip"
+          Compress-Archive -LiteralPath $exe.FullName -DestinationPath "..\$zip" -Force
+          $hash = (Get-FileHash -LiteralPath "..\$zip" -Algorithm SHA256).Hash.ToLowerInvariant()
+          "$hash  $zip" | Out-File -LiteralPath "..\SHA256SUMS.txt" -Encoding ascii
+          "VERSION=$version" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+          "ASSET_ZIP=$zip" | Out-File -FilePath $env:GITHUB_ENV -Encoding utf8 -Append
+
+      - name: Create GitHub Release
+        shell: pwsh
+        env:
+          GH_TOKEN: \${{ github.token }}
+        run: |
+          $existing = gh release view $env:VERSION --repo $env:GITHUB_REPOSITORY 2>$null
+          if ($LASTEXITCODE -eq 0) {
+            Write-Host "Release $env:VERSION already exists; skipping duplicate creation."
+            exit 0
+          }
+          gh release create $env:VERSION "..\$env:ASSET_ZIP" "..\SHA256SUMS.txt" --repo $env:GITHUB_REPOSITORY --target $env:GITHUB_SHA --title "Mohe $env:VERSION · 墨核" --generate-notes
