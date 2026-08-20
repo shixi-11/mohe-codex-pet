@@ -6,6 +6,8 @@
 
 <p align="center"><strong>A quiet local creature for long-running work.</strong></p>
 
+<p align="center">Created by <strong>Shixi Lin</strong>.</p>
+
 <p align="center">
   <a href="README.md">English</a> · <a href="README.zh-CN.md">简体中文</a>
 </p>
@@ -98,5 +100,5 @@ Bug reports, interaction ideas, new motion sequences, accessibility improvements
 
 Code and included original Mohe assets are released under the [MIT License](LICENSE).
 
-Mohe is an independent community project and is not affiliated with or endorsed by OpenAI.
+Mohe is an independent community project created by Shixi Lin. It is not affiliated with or endorsed by OpenAI.
 
