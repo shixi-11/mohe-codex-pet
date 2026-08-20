@@ -97,3 +97,4 @@ pnpm desktop
 代码与仓库内的墨核原创资产采用 [MIT License](LICENSE) 开源。
 
 墨核是独立的社区项目，与 OpenAI 无隶属或背书关系。
+
