@@ -22,7 +22,14 @@ powershell -ExecutionPolicy Bypass -File .\codex-pet\install-mohe.ps1
 4. Restart Codex.
 5. Open **Pets**, refresh the list if necessary, and select **墨核**.
 
-The installer copies only the public pet package to `%USERPROFILE%\.codex\pets\mohe`.
+The installer copies only the public pet package to `$env:CODEX_HOME\pets\mohe` when `CODEX_HOME` is set, otherwise to `%USERPROFILE%\.codex\pets\mohe`.
+
+If you downloaded a release, compare its hash with `SHA256SUMS.txt` before extracting it:
+
+```powershell
+$package = Get-ChildItem .\Mohe-Codex-Pet-*.zip | Select-Object -First 1
+Get-FileHash $package.FullName -Algorithm SHA256
+```
 
 ## Run the Windows desktop app from source
 
@@ -43,7 +50,7 @@ pnpm build
 pnpm desktop
 ```
 
-A ready-to-run Windows build will appear on the [Releases](https://github.com/shixi-11/mohe-codex-pet/releases) page when one is available. Until then, use the source instructions above.
+Download the ready-to-run Windows package from [Releases](https://github.com/shixi-11/mohe-pet/releases). Choose `Mohe-Windows-Portable-*.zip`; the similarly named `Mohe-Codex-Pet-*.zip` is for the Codex Pets panel.
 
 ## How to interact with the desktop edition
 
@@ -92,3 +99,5 @@ Remove-Item -LiteralPath "$env:USERPROFILE\.codex\pets\mohe" -Recurse
 ```
 
 Desktop app built from source: close the app and remove the local clone or generated build directory.
+
+Windows portable release: close Mohe and remove the extracted executable. Local memory remains in `%APPDATA%\mohe-codex-pet` unless you intentionally remove that folder too.

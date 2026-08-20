@@ -64,8 +64,8 @@ This repository contains both versions of the same character:
 
 | If you want to… | Download |
 |---|---|
-| Add Mohe to the Codex Pet list | [Codex Pet package](codex-pet/) |
-| Run the full interactive habitat on Windows | [Windows desktop release](https://github.com/shixi-11/mohe-codex-pet/releases) |
+| Add Mohe inside Codex | **Codex Pet** — download `Mohe-Codex-Pet-*.zip` from [the latest release](https://github.com/shixi-11/mohe-pet/releases/latest) |
+| Keep Mohe in a standalone window | **Windows desktop pet** — download `Mohe-Windows-Portable-*.zip` from [the latest release](https://github.com/shixi-11/mohe-pet/releases/latest) |
 
 ## Install the Codex Pet
 
@@ -89,7 +89,7 @@ pnpm build
 pnpm desktop
 ```
 
-Windows builds are published on the [Releases](https://github.com/shixi-11/mohe-codex-pet/releases) page when available.
+Ready-to-run Windows builds and Codex Pet packages are published together on the [Releases](https://github.com/shixi-11/mohe-pet/releases) page. Each release also includes `SHA256SUMS.txt` for download verification.
 
 ## Character notes
 

@@ -23,7 +23,7 @@
   <img alt="本地优先" src="https://img.shields.io/badge/data-local--first-20262a" />
 </p>
 
-墨核是一只安静、聪明，会守护长期工作的 Codex 宠物。
+墨核是一只安静、聪明，会守护长期工作的本地小兽。它既能住进 Codex，也能以 Windows 桌面宠物的形式独立陪伴。
 
 它不催你，也不占满屏幕。大多数时候，它只是安静守在旁边；你碰一碰耳朵、头顶、胸口、爪子或尾巴，它会歪头、眯眼、抬爪、打滚，或者把自己卷成一团。
 
@@ -64,8 +64,8 @@
 
 | 如果你想…… | 下载 |
 |---|---|
-| 把墨核加入 Codex 的宠物列表 | [Codex 宠物包](codex-pet/) |
-| 在 Windows 上运行完整互动栖息地 | [Windows 桌面版 Release](https://github.com/shixi-11/mohe-codex-pet/releases) |
+| 把墨核放进 Codex 里 | **Codex 宠物版**——从[最新 Release](https://github.com/shixi-11/mohe-pet/releases/latest) 下载 `Mohe-Codex-Pet-*.zip` |
+| 让墨核常驻独立窗口 | **Windows 桌面宠物版**——从[最新 Release](https://github.com/shixi-11/mohe-pet/releases/latest) 下载 `Mohe-Windows-Portable-*.zip` |
 
 ## 安装 Codex 宠物版
 
@@ -89,7 +89,7 @@ pnpm build
 pnpm desktop
 ```
 
-可直接运行的 Windows 版本会发布在 [Releases](https://github.com/shixi-11/mohe-codex-pet/releases) 页面。
+可直接运行的 Windows 桌面版与 Codex 宠物包会一起发布在 [Releases](https://github.com/shixi-11/mohe-pet/releases) 页面；每个版本同时提供 `SHA256SUMS.txt`，用于核对下载文件是否完整。
 
 ## 角色设定
 

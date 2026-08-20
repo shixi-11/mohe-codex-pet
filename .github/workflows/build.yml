@@ -11,6 +11,17 @@ permissions:
   contents: read
 
 jobs:
+  validate-codex-pet:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: python -m pip install --disable-pip-version-check Pillow==11.3.0
+      - run: python scripts/validate_codex_pet.py
+
   build:
     runs-on: windows-latest
     timeout-minutes: 20
@@ -21,7 +32,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: pnpm/action-setup@v4
         with:
-          version: 10
+          version: 10.17.1
       - uses: actions/setup-node@v4
         with:
           node-version: 22
@@ -30,8 +41,21 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm build
       - name: Package Windows portable app
-        if: github.event_name != 'pull_request'
         run: pnpm desktop:pack
+      - name: Smoke-test packaged desktop app
+        shell: pwsh
+        run: |
+          $exe = Get-ChildItem -LiteralPath "release" -Filter "*.exe" -File | Select-Object -First 1
+          if ($null -eq $exe) { throw "No Windows executable was produced." }
+          $report = Join-Path $env:RUNNER_TEMP "mohe-smoke.json"
+          $env:MOHE_SMOKE_TEST = "1"
+          $env:MOHE_SMOKE_REPORT = $report
+          $process = Start-Process -FilePath $exe.FullName -PassThru -Wait
+          if ($process.ExitCode -ne 0) { throw "Desktop smoke test exited with code $($process.ExitCode)." }
+          $result = Get-Content -LiteralPath $report -Raw | ConvertFrom-Json
+          if (-not $result.shell -or -not $result.imageLoaded -or $result.textLength -lt 100 -or $result.title -ne "墨核 · Windows 桌面宠物") {
+            throw "Desktop smoke test did not render the expected interface: $(Get-Content -LiteralPath $report -Raw)"
+          }
       - name: Upload Windows portable app
         if: github.event_name != 'pull_request'
         uses: actions/upload-artifact@v4
